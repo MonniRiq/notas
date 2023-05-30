@@ -1,0 +1,270 @@
+copia local
+git clone /path/to/repository
+registrar cambios (añadirlos al index ) usando
+git add <filename>
+git add .
+
+git add .
+git commit -m 'cambio1'
+git push origin main
+git pull
+para hacer commit a estos cambios usa
+git commit -m "commit message"
+para pushear los cambios
+git push origin master
+para actualizar un branch
+git pull
+
+abrir carpetas ls
+cd 02 tab
+
+
+
+programar es utilizar una secuencia logica de un determinado 
+conjunto de intrucciones para resolver determinado problema .
+sus instrucciones se componen de un lenguaje que tiene una determinada sintaxis .
+Los lenguajes de programación se componen de  un set de instrucciones un poco más
+ complejo que el ejemplo, para poder interactuar con el computador, además de una sintaxis 
+específica que funciona como lo hace el lenguaje que usamos los humanos para comunicarnos.
+c, java phyton . 
+Reglas para nombrar variables
+El nombre no puede empezar con un número
+No se permite el uso de guiones medios
+No se permite el uso de espacios
+No podemos utilizar palabras reservadas
+
+TIPOS DE DATOS EN PHYTON
+
+En Python existen varios tipos de datos, entre los más comunes se encuentran:
+
+Enteros (int): números enteros positivos o negativos, sin decimales.
+Flotantes (float): números con decimales.
+Booleanos (bool): valores que representan verdadero o falso.
+Cadenas de caracteres (str): secuencias de caracteres o texto.
+  para ver el valor de la variable guardada
+print(nombre de la variable)
+  
+para recuperar el dato de una variable guardada
+type (nombre de la variable)
+print ( type(nombre)
+
+indica si el valor es true(valor almacenado) o false(vacia)
+bool(nombre)
+
+
+
+VARIABLES ASIMETRICAS
+
+suma +
+resta -
+multiplicacion *
+potenciacion **
+division /
+division // numero entero
+lo que sobra de la division %
+relacionales para comparar dos valores y devolver un resultado booleano ( t o f)
+igual ==
+distinto !=
+mayor >
+menor <
+mayor o igual >=
+menor o igual <=
+
+ASIGNACION
+ se utilizan para asignar valores a variables
+ asignar valores a una variable con un signo `
+igual ==
+distinto !=
+ modifica el valor de la variable +=
+ print()
+
+usar entre expresiones booleanas AND
+
+true 1 
+false 0
+tienen que ser ambas verdaderas para que sea true
+a + b true a true b true 
+print(true and true)
+
+usar para operaciones de disyuncion logica OR
+
+si al menos 1 es true el resultado es true
+usar not 
+invierte true por false y false por true
+print(true or true)
+
+NOT
+print (not true)
+
+usar para operacion de disyuncuion exclusiva logica 
+entre dos expresiones booleanas XOR or exclusiva
+usar ^ ej print ( a^b)
+a=bool(1) t
+b=bool(0) f
+print (a^b) t 
+a=bool(0)
+b=bool(0)
+print (a^b) f
+a=bool(1)
+b=bool(1)
+print (a^b) f
+
+STRING
+"hola "+"henry"
+"henry"*3
+
+suma numeros complejos
+ a = 3 + 1j
+b = 1 + 3j
+print(a + b)
+cociente 
+a = 27 / 4
+print(a)
+
+CONVERSION DE TIPOS DE DATOS
+
+num=3.5
+print(type(num)) float
+int (num) 3
+
+num = "8" 
+type(num)str
+int(num) 8
+para conservar el cambio
+num=int(num)
+
+para consultar type() 
+
+ CONVERTIR STR A FLOAT
+num="8.5"
+prynt(type(num)) str
+
+num3=float(num)
+
+print(type(num))
+print(type(num3)) str float
+
+CONVERTIR ENTERO A FLOAT
+num=4
+print(type(num))int
+
+num4=float(num)
+
+print(type(num))
+print(type(num4)) int float
+ 
+
+
+ESTRUCTURAS DE CONTROL DE FLUJO
+ bloque de codigo con funcion determinada
+
+condicion se evalua si se cumple una condicion o 
+varias y se ejecuta determinada accion
+
+IF condicion a evaluar: tarea en caso de verdadero
+ELSE tarea en caso de falso
+
+
+ELIF ELSE+IF
+
+IF (condicion1)
+tarea en caso de q condicion 1 sea verdadera
+ELIF (condicion2)
+tarea en caso de que condicion 2 sea verdadera 
+ELSE
+tarea en caso de que condicion 1 y 2 sean falsas
+
+
+a=5
+b=7
+
+if a<b:
+    print ("a es menor que b")
+elif a>b:
+    print ("a es mayor que b")
+else:
+     print("a y b son iguales")
+
+
+BUCLES
+
+FOR
+ for in
+numeros = [1,2,3,4,5]
+for num in numeros:
+    suma= num+1
+    print(suma) 
+
+WHILE
+
+while num < 6:
+    print("num ", num)
+    num =num +1
+
+
+
+PARA SALIR CRTL +C
+
+SENTENCIA 
+
+BREAK 
+se usa para terminar el bucle
+
+for i in range (5):
+print(i)
+break
+
+para los valores enteros del 1 al 20 , imprimir por pantalla si es par o inpar
+ej
+for i in range(1,21):
+    if i % 2 == 0:
+        print('el numero' , str(i), 'es par')
+    else:
+        print('el numero', str(i), 'es inpar')
+
+# resuelto con while
+
+i = 1
+while (i <= 20):
+    if (i % 2 == 0):
+        print(f'El numero {i} es par')
+    else:
+        print(f'El numero {i} es impar')
+    i = i + 1
+
+cadena = 'Python'
+for letra in cadena:
+    if letra == 'h':
+        print("Se encontró la h")
+        break
+    print(letra)
+
+x = 5
+while True:
+    x -= 1
+    print(x)
+    if x == 0:
+        break
+print("Fin del bucle")
+
+variable que contenga un numero entero y realizar ciclo for la misma cantidad de ciclos
+n = 12
+for i in range(0, n):
+    pass
+print(i)
+
+CONTINUE 
+no rompe el bucle pasa a la siguiente intereaccion
+
+cadena = 'Python'
+for letra in cadena:
+    if letra == 'P':
+        continue
+    print(letra)
+
+
+LISTAS
+
+mi_lista = ["manzana", "banana", "cereza", "dátil"]
+tercer_elemento = mi_lista[2]
+print(tercer_elemento)  # salida: "cereza"

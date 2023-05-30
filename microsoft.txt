@@ -1,0 +1,521 @@
+Los operadores permiten realizar varias 
+operaciones en las variables y sus valores.
+ La idea general es que hay un lado izquierdo,
+ un lado derecho y un operador en el medio:
+
+<left side> <operator> <right side>
+left_side = 10
+right_side = 5
+left_side / right_side # 2En este ejemplo se usa una 
+barra diagonal (/) para dividir el valor left_side 
+por el valor right_side.
+
+Tipo	Descripción	Por ejemplo
+Tipo numérico	Número, con o sin decimales	int, float, complex, no = 3
+Tipo de texto	Cadena de caracteres	str = "a literal string"
+Tipo booleano	Boolean	  continue = True
+
+Este es un fragmento de código que muestra algunos de los tipos anteriores:
+
+planets_in_solar_system = 8 # int, pluto used to be the 9th planet, but is too small
+distance_to_alpha_centauri = 4.367 # float, lightyears
+can_liftoff = True
+shuttle_landed_on_the_moon = "Apollo 11" #string
+
+
+¿Cómo saber qué tipo tiene algo? Si ve que los datos se asignan a la variable como se muestra en el código siguiente, puede detectarlo:
+distance_to_alpha_centauri = 4.367 # looks like a float
+
+La otra manera es usar la función type():
+type(distance_to_alpha_centauri) ## <class 'float'>
+
+Con los operadores aritméticos, se hacen cálculos como suma, resta, división y multiplicación.
+ Este es un subconjunto de operadores aritméticos que puede usar:
+
+Tipo	Descripción	Ejemplo
++	Operador de suma que agrega dos valores juntos	1 + 1
+-	Operador de resta que quita el valor del lado derecho del lado izquierdo	1 - 2
+/	Operador de división que divide el lado izquierdo tantas veces como el lado derecho especifica	10 / 2
+*	Operador de multiplicación	2 * 2
+
+Puede usar operadores de asignaciónpara asignar valores a una variable a lo largo del ciclo de vida de la variable.
+Operador	Ejemplo
+=	x = 2 x ahora contiene 2.
++=	x += 2 x incrementado en 2. Si contenía 2 antes, ahora tiene un valor de 4.
+-=	x -= 2 x reducido en 2. Si contenía 2 antes, ahora tiene un valor de 0.
+/=	x /= 2 x dividido por 2. Si contenía 2 antes, ahora tiene un valor de 1.
+*=	x *= 2 x multiplicado por 2. Si contenía 2 antes, ahora tiene un valor de 4.
+
+Para trabajar con una fecha, debe importar el módulo date:
+
+from datetime import date
+A continuación, puede llamar a las funciones con las que quiere trabajar. Para obtener la fecha de hoy, puede llamar a la función today():
+date.today()
+
+Para mostrar la fecha en la consola, puede usar la función print(). La función print() adopta muchos tipos de datos como entrada. 
+Aquí se muestra cómo puede mostrar la fecha de hoy:
+print(date.today())
+
+CONVERSION TIPOS DE DATOS
+
+Quiere usar una fecha con algo, normalmente una cadena. Si, por ejemplo, desea mostrar la fecha de hoy en la consola, podría experimentar algún problema:
+print("Today's date is: " + date.today())
+
+Lo que se obtiene es un error:
+
+Traceback (most recent call last):
+  File "/<path>/program.py", line 4, in <module>
+    print("Today's date" + date.today())
+TypeError: can only concatenate str (not "datetime.date") to str
+
+La última fila del mensaje le indica cuál es el problema. Está intentando usar el operador + y combinar dos tipos de datos diferentes, una cadena y una fecha.
+
+Para que este código funcione, debe convertir la fecha en una cadena. Para realizar esta conversión, use la función de utilidad str():
+
+print("Today's date is: " + str(date.today()))
+
+La salida es similar a esta:
+Today's date is: <date>
+
+
+
+¿Cómo se capturan estos comandos desde la perspectiva de la codificación? Mediante el módulo sys, puede recuperar los argumentos de la línea de comandos y usarlos en el programa. Observe el código siguiente:
+
+import sys
+
+print(sys.argv)
+print(sys.argv[0]) # program name
+print(sys.argv[1]) # first arg
+
+
+sys.argv es una matriz o estructura de datos que contiene muchos elementos. La primera posición, que se indica como 0 en la matriz, contiene el nombre del programa. La segunda posición, 1, contiene el primer argumento. Supongamos que el programa backup.py contiene el código de ejemplo y lo ejecuta de la siguiente manera:
+
+python3 backup.py 2023-01-01
+A continuación, el programa genera el siguiente resultado:
+
+Resultados
+
+['backup.py', '2023-01-01'] 
+backup.py
+2023-01-01
+
+Para capturar información del usuario, use la función input(). Este es un ejemplo:
+
+print("Welcome to the greeter program")
+name = input("Enter your name: ")
+print("Greetings " + name)
+
+Supongamos que el programa input.py contiene el mismo código y lo ejecuta de la siguiente manera:
+
+python3 input.py
+
+Al ejecutar el programa, se le invita a escribir su nombre, por ejemplo:
+
+Welcome to the greeter program
+Enter your name: 
+
+Después de escribir un valor y presionar Enter (Entrar), se devuelve el saludo:
+
+Welcome to the greeter program
+Enter your name: Picard
+Greetings Picard
+
+
+La función input() almacena un resultado como una cadena, por lo que es posible que el código siguiente no haga lo que quiera:
+
+
+print("calculator program")
+first_number = input("first number: ")
+second_number = input("second number: ")
+print(first_number + second_number)
+
+La ejecución de este programa le invita a escribir el primer número, supongamos:3
+
+calculator program
+first number: 3
+Después de presionar Enter (Entrar), puede escribir el segundo número, supongamos:4
+
+calculator program
+first number: 3
+second number: 4
+Al presionar Enter (Entrar), haga clic en el siguiente resultado:
+
+calculator program
+first number: 3
+second number: 4
+34
+Probablemente ha pensado en que este programa le responda con 7 lugar de 34. ¿Qué ha fallado?
+
+La explicación es que first_number y second_number son cadenas. Para que el cálculo funcione correctamente, debe cambiar esas cadenas a números mediante la función int(). Al modificar la última línea del programa para usar int(), puede resolver el problema:
+
+print(int(first_number) + int(second_number))
+
+Volver a ejecutar el programa con los mismos valores ahora devuelve 7 como respuesta:
+
+calculator program
+first number: 3
+second number: 4
+7
+
+
+CREACION DE UN ENTORNO VIRTUAL
+Para crear un entorno virtual, llame al módulo venv. El módulo espera un nombre como un argumento.
+
+Siga estos pasos.
+
+Vaya al directorio donde desea almacenar el proyecto.
+
+Use el siguiente comando para llamar al módulo venv.
+
+
+python -m venv env
+En este momento, se crean automáticamente algunos directorios. Los nombres de directorio difieren ligeramente en función del sistema operativo.
+
+Los directorios se parecen a esto en Windows:
+
+
+/env
+  /include
+  /lib
+  /Scripts
+Los directorios se parecen a esto en Linux y macOS:
+
+/env
+  /bin
+  /include
+  /lib
+El entorno necesita el directorio env para realizar un seguimiento de detalles como qué versión de Python y qué bibliotecas está usando. No coloque los archivos de programa en el directorio env. Se recomienda poner los archivos en un directorio denominado src o algo similar. La estructura del proyecto podría tener un aspecto similar al siguiente:
+
+/env
+/src
+  program.py  
+Active el entorno virtual:
+En este momento, ya tiene un entorno virtual, pero no ha empezado a usarlo. Para usarlo, debe activarlo mediante una llamada a un script activate.
+
+Este es el aspecto de la activación en Windows:
+
+C:\ .. \env\Scripts\activate
+
+Este es el aspecto de la activación en Linux and macOS:
+
+source env/bin/activate
+
+La llamada a activate cambia el símbolo del sistema. Le precede (env) y tiene un aspecto similar al de este ejemplo:
+
+
+(env) -> path/to/project
+En este momento, está dentro de su entorno virtual. Todo lo que haga se ejecuta de forma aislada.
+
+
+INSTALACION DE UN PAQUETE
+Instale un paquete mediante pip. El comando pip usa el índice de paquetes de Python, o PyPi en su forma abreviada, para saber dónde obtener los paquetes. Puede visitar el sitio web de PyPi para ver qué paquetes están disponibles.
+
+Para instalar un paquete, ejecute pip install desde el directorio env, como en este ejemplo:
+
+pip install python-dateutil
+
+Si ejecuta el comando anterior, descargará e instalará dateutil, un paquete para analizar el formato de archivo .yml. Una vez instalado el paquete, puede verlo en la lista si expande el directorio lib en env, de la siguiente forma:
+
+/env
+  /lib
+    /dateutil
+Para ver qué paquetes están ahora instalados en el entorno virtual, puede ejecutar pip freeze. Este comando genera una lista de los paquetes instalados en el terminal:
+
+python-dateutil==2.8.2
+six==1.16.0
+
+ Nota
+
+La razón por la que la lista anterior contiene algo más que simplemente pipdate es que pipdate se basa en otras bibliotecas que también se capturan.
+
+Para asegurarse de que estos paquetes solo existen en el entorno virtual, intente salir de ese entorno mediante una llamada a deactivate:
+
+deactivate
+
+Observe cómo cambia el símbolo del sistema del terminal. Ya no va precedido de (env) y ha cambiado a esta apariencia:
+
+path/to/project
+
+Si ejecuta pip freeze, verá una lista mucho más larga de dependencias. Esta lista indica que se muestran todos los paquetes instalados en la máquina en lugar de solo los que están instalados en el entorno virtual.
+
+
+
+
+También puede usar los siguientes comandos para instalar un paquete:
+
+Tener un conjunto de archivos en la máquina e instalar desde ese origen:
+
+
+cd <to where the package is on your machine>
+python3 -m pip install .
+Instalar desde un repositorio de GitHub que proporciona control de versiones:
+
+
+git+https://github.com/your-repo.git
+Instalar desde un archivo comprimido:
+
+python3 -m pip install package.tar.gz
+Uso de un paquete instalado
+Ahora tiene un paquete instalado. ¿Cómo se usa en el código?
+
+Asegúrese de que tiene un directorio para los archivos. Se recomienda llamar al directorio src y agregar un archivo de Python de punto de entrada denominado app.py. Ahora agregue código para llamar a dateutil:
+
+from datetime import *
+from dateutil.relativedelta import *
+now = datetime.now()
+print(now)
+
+now = now + relativedelta(months=1, weeks=1, hour=10)
+
+print(now)
+Ejecute la aplicación:
+
+
+python newapp.py
+El resultado debe parecerse a este:
+
+
+2023-01-30 17:04:24.799976
+2023-03-07 10:04:24.799976
+
+
+Esta es la tabla de verdad para and:
+
+subexpression1	Operador	subexpression2	Resultado
+True	and	True	True
+True	and	False	False
+False	and	True	False
+False	and	False	False
+Esta es la tabla de verdad para or:
+
+subexpression1	Operador	subexpression2	Resultado
+True	or	True	True
+True	or	False	True
+False	or	True	True
+False	or	False	False
+
+
+
+Usar un carácter de nueva línea (\n).
+Usar comillas triples (""").
+
+Los caracteres de nueva línea separan el texto en varias líneas al imprimir la salida:
+>>> multiline = "Facts about the Moon:\n There is no atmosphere.\n There is no sound."
+>>> print(multiline)
+Facts about the Moon:
+ There is no atmosphere.
+ There is no sound.
+
+Puede lograr el mismo resultado con las comillas triples:
+>>> multiline = """Facts about the Moon:
+...  There is no atmosphere.
+...  There is no sound."""
+>>> print(multiline)
+Facts about the Moon:
+ There is no atmosphere.
+ There is no sound
+
+
+Los métodos de cadena forman parte del tipo str. Esto significa que los métodos existen como variables de cadena o directamente como parte de la cadena. Por ejemplo, el método .title() se puede usar directamente con una cadena:
+>>> "temperatures and facts about the moon".title()
+'Temperatures And Facts About The Moon'
+
+Y el mismo comportamiento y utilización se produce en una variable:
+>>> heading = "temperatures and facts about the moon"
+>>> heading.title()
+'Temperatures And Facts About The Moon'
+
+Un método de cadena común es .split(). Sin argumentos, el método separará la cadena en cada espacio. Esto crearía una lista de todas las palabras o números separados por un espacio:
+>>> temperatures = """Daylight: 260 F
+... Nighttime: -280 F"""
+>>> temperatures .split()
+['Daylight:', '260', 'F', 'Nighttime:', '-280', 'F']
+
+En este ejemplo, trabaja con varias líneas, por lo que el carácter de nueva línea (implícito) se puede usar para dividir la cadena al final de cada línea, y crear líneas únicas:
+
+>>> temperatures .split('\n')
+['Daylight: 260 F', 'Nighttime: -280 F']
+
+Este tipo de división resulta útil cuando se necesita un bucle para procesar o extraer información, o bien cuando se cargan datos desde un archivo de texto.
+
+La manera más sencilla de detectar si existe una palabra, un carácter o un grupo de caracteres determinados en una cadena es usar el operador in:
+>>> "Moon" in "This text will describe facts and challenges with space travel"
+False
+>>> "Moon" in "This text will describe facts about the Moon"
+True
+
+Un enfoque para buscar la posición de una palabra específica en una cadena consiste en usar el método .find():
+>>> temperatures = """Saturn has a daytime temperature of -170 degrees Celsius,
+... while Mars has -28 Celsius."""
+>>> temperatures.find("Moon")
+-1
+
+El método .find() devuelve -1 cuando no se encuentra la palabra, o bien devuelve el índice (el número que representa la posición en la cadena). Así es como se comportaría si busca la palabra Mars:
+>>> temperatures.find("Mars")
+65
+
+65 es la posición donde "Mars" aparece en la cadena.
+
+Otra manera de buscar contenido consiste en usar el método .count(), que devuelve el número total de repeticiones de una palabra determinada en una cadena:
+>>> temperatures.count("Mars")
+1
+>>> temperatures.count("Moon")
+0
+
+Las cadenas en Python distinguen mayúsculas de minúsculas, lo que significa que Luna y luna se consideran palabras diferentes. Para realizar una comparación sin distinguir mayúsculas de minúsculas, puede convertir una cadena en letras minúsculas mediante el método .lower():
+>>> "The Moon And The Earth".lower()
+'the moon and the earth'
+
+Como sucede con el método .lower(), las cadenas tienen un método .upper() que hace lo contrario y convierte todos los caracteres en mayúsculas:
+
+>>> "The Moon And The Earth".upper()
+'THE MOON AND THE EARTH'
+
+Comprobación del contenido
+Hay ocasiones en las que procesará texto para extraer información con una presentación irregular. Por ejemplo, la cadena siguiente es más fácil de procesar que un párrafo no estructurado:
+>>> temperatures = "Mars Average Temperature: -60 C"
+
+Para extraer la temperatura media en Marte, puede hacerlo con los métodos siguientes:
+
+>>> parts = temperatures.split(':')
+>>> parts
+['Mars average temperature', ' -60 C']
+>>> parts[-1]
+' -60 C'
+
+El código anterior confía en que todo lo que hay después de los dos puntos (:) es una temperatura. La cadena se divide en :, lo que genera una lista de dos elementos. El uso de [-1] en la lista devuelve el último elemento que, en este ejemplo, es la temperatura.
+
+Si el texto es irregular, no puede usar los mismos métodos de división para obtener el valor. Debe recorrer en bucle los elementos y comprobar si los valores son de un tipo determinado. Python tiene métodos que ayudan a comprobar el tipo de cadena:
+
+>>> mars_temperature = "The highest temperature on Mars is about 30 C"
+>>> for item in mars_temperature.split():
+...     if item.isnumeric():
+...         print(item)
+...
+30
+
+Como sucede con el método .isnumeric(), .isdecimal() puede buscar cadenas que parezcan decimales.
+
+Le sorprenderá saber que "-70".isnumeric() devolverá False. Esto se debe a que todos los caracteres de la cadena tendrían que ser numéricos y el guión (-) no lo es. Si tiene que comprobar números negativos en una cadena, el método .isnumeric() no funcionará.
+
+Hay validaciones adicionales que puede aplicar en las cadenas para comprobar si hay valores. En el caso de los números negativos, el guion se agrega como prefijo al número y se puede detectar con el método .startswith():
+>>> "-60".startswith('-')
+True
+
+De forma similar, el método .endswith() ayuda a comprobar el último carácter de una cadena:
+>>> if "30 C".endswith("C"):
+    print("This temperature is in Celsius")
+'This temperature is in Celsius'
+
+
+Transformar texto
+Hay otros métodos que ayudan en situaciones en las que el texto se debe transformar en algo distinto. Hasta ahora, ha visto cadenas que pueden usar C para Celsius y F para Fahrenheit. Puede usar el método .replace() para buscar y reemplazar repeticiones de un carácter o grupo de caracteres:
+>>> "Saturn has a daytime temperature of -170 degrees Celsius, while Mars has -28 Celsius.".replace("Celsius", "C")
+'Saturn has a daytime temperature of -170 degrees C, while Mars has -28 C.'
+
+Como se ha mencionado antes, .lower() es una buena manera de normalizar el texto para realizar una búsqueda sin distinguir mayúsculas de minúsculas. Ahora se comprobará rápidamente si algún texto analiza las temperaturas:
+>>> text = "Temperatures on the Moon can vary wildly."
+>>> "temperatures" in text
+False
+>>> "temperatures" in text.lower()
+True
+
+
+Es posible que no tenga que realizar la comprobación sin distinguir mayúsculas de minúsculas todo el tiempo, pero convertir en minúsculas todas las letras es un buen enfoque cuando en el texto se usa una mezcla de mayúsculas y minúsculas.
+
+Después de dividir el texto y realizar las transformaciones, es posible que tenga que volver a ensamblar todas las piezas. Al igual que el método .split() puede separar caracteres, el método .join() puede volver a agruparlos.
+
+El método .join() necesita un elemento iterable (como una lista de Python) como argumento, por lo que su uso es diferente al de otros métodos de cadena:
+
+>>> moon_facts = ["The Moon is drifting away from the Earth.", "On average, the Moon is moving about 4cm every year"]
+>>> '\n'.join(moon_facts)
+'The Moon is drifting away from the Earth.\nOn average, the Moon is moving about 4cm every year'
+En este ejemplo, se usa el carácter de nueva línea '\n' para unir todos los elementos de la lista.
+
+
+
+Formato de cadenas en Python
+
+Además de transformar texto y realizar operaciones básicas, como buscar y buscar coincidencias, es esencial dar formato al texto al presentar información. La manera más sencilla de presentar información de texto con Python consiste en usar la función print(). Comprobará que es fundamental incluir información en variables y otras estructuras de datos en cadenas que print() pueda usar.
+
+En esta unidad, aprenderá varias maneras válidas de incluir valores de variable en el texto mediante Python.
+
+Formato de signo de porcentaje (%)
+El marcador de posición de la variable de la cadena es %s. Después de la cadena, use otro carácter % seguido del nombre de la variable. En el ejemplo siguiente, se muestra cómo dar formato mediante el carácter %:
+
+>>> mass_percentage = "1/6"
+>>> print("On the Moon, you would weigh about %s of your weight on Earth" % mass_percentage)
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+El uso de varios valores cambia la sintaxis, ya que se necesitan paréntesis para rodear las variables que se pasan:
+
+>>> print("""Both sides of the %s get the same amount of sunlight,
+... but only one side is seen from %s because
+... the %s rotates around its own axis when it orbits %s.""" % ("Moon", "Earth", "Moon", "Earth"))
+Both sides of the Moon get the same amount of sunlight,
+but only one side is seen from Earth because
+the Moon rotates around its own axis when it orbits Earth.
+
+El método format()
+El método .format() usa llaves ({}) como marcadores de posición dentro de una cadena y utiliza la asignación de variables para reemplazar texto.
+
+>>> mass_percentage = "1/6"
+>>> print("On the Moon, you would weigh about {} of your weight on Earth".format(mass_percentage))
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+No es necesario asignar variables repetidas varias veces, lo que hace que sea menos detallado porque es necesario asignar menos variables:
+
+>>> print("""You are lighter on the {0}, because on the {0} 
+... you would weigh about {1} of your weight on Earth""".format("Moon", mass_percentage))
+You are lighter on the Moon, because on the Moon you would weigh about 1/6 of your weight on Earth
+
+En lugar de llaves vacías, la sustitución consiste en usar números. {0} significa usar el primer argumento (índice cero) de .format(), que en este caso es Moon. {0} funciona bien para una repetición simple, pero reduce la legibilidad. Para mejorar la legibilidad, use argumentos de palabra clave en .format() y, después, haga referencia a los mismos argumentos entre llaves:
+
+>>> print("""You are lighter on the {moon}, because on the {moon} 
+... you would weigh about {mass} of your weight on Earth""".format(moon="Moon", mass=mass_percentage))
+You are lighter on the Moon, because on the Moon you would weigh about 1/6 of your weight on Earth
+
+
+Acerca de las cadenas f-strings
+A partir de la versión 3.6 de Python, es posible usar f-strings. Estas cadenas parecen plantillas y usan los nombres de variable del código. El uso de f-strings en el ejemplo anterior tendría el siguiente aspecto:
+
+>>> print(f"On the Moon, you would weigh about {mass_percentage} of your weight on Earth")
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+Las variables se incluyen entre llaves y la cadena debe usar el prefijo f.
+
+Además de que las f-strings son menos detalladas que cualquier otra opción de formato, es posible usar expresiones entre llaves. Estas expresiones pueden ser funciones u operaciones directas. Por ejemplo, si quiere representar el valor 1/6 como un porcentaje con una posición decimal, puede usar directamente la función round():
+
+>>> round(100/6, 1)
+16.7
+
+Con f-strings, no es necesario asignar un valor a una variable de antemano:
+
+>>> print(f"On the Moon, you would weigh about {round(100/6, 1)}% of your weight on Earth")
+On the Moon, you would weigh about 16.7% of your weight on Earth
+
+Para usar una expresión no es necesaria una llamada de función. Cualquiera de los métodos de cadena también son válidos. Por ejemplo, la cadena podría aplicar un uso específico de mayúsculas y minúsculas para crear un título:
+
+>>> subject = "interesting facts about the moon"
+>>> f"{subject.title()}"
+'Interesting Facts About The Moon'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

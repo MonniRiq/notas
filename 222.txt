@@ -1,0 +1,903 @@
+Los operadores permiten realizar varias 
+operaciones en las variables y sus valores.
+ La idea general es que hay un lado izquierdo,
+ un lado derecho y un operador en el medio:
+
+<left side> <operator> <right side>
+left_side = 10
+right_side = 5
+left_side / right_side # 2En este ejemplo se usa una 
+barra diagonal (/) para dividir el valor left_side 
+por el valor right_side.
+
+Tipo	Descripción	Por ejemplo
+Tipo numérico	Número, con o sin decimales	int, float, complex, no = 3
+Tipo de texto	Cadena de caracteres	str = "a literal string"
+Tipo booleano	Boolean	  continue = True
+
+Este es un fragmento de código que muestra algunos de los tipos anteriores:
+
+planets_in_solar_system = 8 # int, pluto used to be the 9th planet, but is too small
+distance_to_alpha_centauri = 4.367 # float, lightyears
+can_liftoff = True
+shuttle_landed_on_the_moon = "Apollo 11" #string
+
+
+¿Cómo saber qué tipo tiene algo? Si ve que los datos se asignan a la variable como se muestra en el código siguiente, puede detectarlo:
+distance_to_alpha_centauri = 4.367 # looks like a float
+
+La otra manera es usar la función type():
+type(distance_to_alpha_centauri) ## <class 'float'>
+
+Con los operadores aritméticos, se hacen cálculos como suma, resta, división y multiplicación.
+ Este es un subconjunto de operadores aritméticos que puede usar:
+
+Tipo	Descripción	Ejemplo
++	Operador de suma que agrega dos valores juntos	1 + 1
+-	Operador de resta que quita el valor del lado derecho del lado izquierdo	1 - 2
+/	Operador de división que divide el lado izquierdo tantas veces como el lado derecho especifica	10 / 2
+*	Operador de multiplicación	2 * 2
+
+Puede usar operadores de asignaciónpara asignar valores a una variable a lo largo del ciclo de vida de la variable.
+Operador	Ejemplo
+=	x = 2 x ahora contiene 2.
++=	x += 2 x incrementado en 2. Si contenía 2 antes, ahora tiene un valor de 4.
+-=	x -= 2 x reducido en 2. Si contenía 2 antes, ahora tiene un valor de 0.
+/=	x /= 2 x dividido por 2. Si contenía 2 antes, ahora tiene un valor de 1.
+*=	x *= 2 x multiplicado por 2. Si contenía 2 antes, ahora tiene un valor de 4.
+
+Para trabajar con una fecha, debe importar el módulo date:
+
+from datetime import date
+A continuación, puede llamar a las funciones con las que quiere trabajar. Para obtener la fecha de hoy, puede llamar a la función today():
+date.today()
+
+Para mostrar la fecha en la consola, puede usar la función print(). La función print() adopta muchos tipos de datos como entrada. 
+Aquí se muestra cómo puede mostrar la fecha de hoy:
+print(date.today())
+
+CONVERSION TIPOS DE DATOS
+
+Quiere usar una fecha con algo, normalmente una cadena. Si, por ejemplo, desea mostrar la fecha de hoy en la consola, podría experimentar algún problema:
+print("Today's date is: " + date.today())
+
+Lo que se obtiene es un error:
+
+Traceback (most recent call last):
+  File "/<path>/program.py", line 4, in <module>
+    print("Today's date" + date.today())
+TypeError: can only concatenate str (not "datetime.date") to str
+
+La última fila del mensaje le indica cuál es el problema. Está intentando usar el operador + y combinar dos tipos de datos diferentes, una cadena y una fecha.
+
+Para que este código funcione, debe convertir la fecha en una cadena. Para realizar esta conversión, use la función de utilidad str():
+
+print("Today's date is: " + str(date.today()))
+
+La salida es similar a esta:
+Today's date is: <date>
+
+
+
+¿Cómo se capturan estos comandos desde la perspectiva de la codificación? Mediante el módulo sys, puede recuperar los argumentos de la línea de comandos y usarlos en el programa. Observe el código siguiente:
+
+import sys
+
+print(sys.argv)
+print(sys.argv[0]) # program name
+print(sys.argv[1]) # first arg
+
+
+sys.argv es una matriz o estructura de datos que contiene muchos elementos. La primera posición, que se indica como 0 en la matriz, contiene el nombre del programa. La segunda posición, 1, contiene el primer argumento. Supongamos que el programa backup.py contiene el código de ejemplo y lo ejecuta de la siguiente manera:
+
+python3 backup.py 2023-01-01
+A continuación, el programa genera el siguiente resultado:
+
+Resultados
+
+['backup.py', '2023-01-01'] 
+backup.py
+2023-01-01
+
+Para capturar información del usuario, use la función input(). Este es un ejemplo:
+
+print("Welcome to the greeter program")
+name = input("Enter your name: ")
+print("Greetings " + name)
+
+Supongamos que el programa input.py contiene el mismo código y lo ejecuta de la siguiente manera:
+
+python3 input.py
+
+Al ejecutar el programa, se le invita a escribir su nombre, por ejemplo:
+
+Welcome to the greeter program
+Enter your name: 
+
+Después de escribir un valor y presionar Enter (Entrar), se devuelve el saludo:
+
+Welcome to the greeter program
+Enter your name: Picard
+Greetings Picard
+
+
+La función input() almacena un resultado como una cadena, por lo que es posible que el código siguiente no haga lo que quiera:
+
+
+print("calculator program")
+first_number = input("first number: ")
+second_number = input("second number: ")
+print(first_number + second_number)
+
+La ejecución de este programa le invita a escribir el primer número, supongamos:3
+
+calculator program
+first number: 3
+Después de presionar Enter (Entrar), puede escribir el segundo número, supongamos:4
+
+calculator program
+first number: 3
+second number: 4
+Al presionar Enter (Entrar), haga clic en el siguiente resultado:
+
+calculator program
+first number: 3
+second number: 4
+34
+Probablemente ha pensado en que este programa le responda con 7 lugar de 34. ¿Qué ha fallado?
+
+La explicación es que first_number y second_number son cadenas. Para que el cálculo funcione correctamente, debe cambiar esas cadenas a números mediante la función int(). Al modificar la última línea del programa para usar int(), puede resolver el problema:
+
+print(int(first_number) + int(second_number))
+
+Volver a ejecutar el programa con los mismos valores ahora devuelve 7 como respuesta:
+
+calculator program
+first number: 3
+second number: 4
+7
+
+
+CREACION DE UN ENTORNO VIRTUAL
+Para crear un entorno virtual, llame al módulo venv. El módulo espera un nombre como un argumento.
+
+Siga estos pasos.
+
+Vaya al directorio donde desea almacenar el proyecto.
+
+Use el siguiente comando para llamar al módulo venv.
+
+
+python -m venv env
+En este momento, se crean automáticamente algunos directorios. Los nombres de directorio difieren ligeramente en función del sistema operativo.
+
+Los directorios se parecen a esto en Windows:
+
+
+/env
+  /include
+  /lib
+  /Scripts
+Los directorios se parecen a esto en Linux y macOS:
+
+/env
+  /bin
+  /include
+  /lib
+El entorno necesita el directorio env para realizar un seguimiento de detalles como qué versión de Python y qué bibliotecas está usando. No coloque los archivos de programa en el directorio env. Se recomienda poner los archivos en un directorio denominado src o algo similar. La estructura del proyecto podría tener un aspecto similar al siguiente:
+
+/env
+/src
+  program.py  
+Active el entorno virtual:
+En este momento, ya tiene un entorno virtual, pero no ha empezado a usarlo. Para usarlo, debe activarlo mediante una llamada a un script activate.
+
+Este es el aspecto de la activación en Windows:
+
+C:\ .. \env\Scripts\activate
+
+Este es el aspecto de la activación en Linux and macOS:
+
+source env/bin/activate
+
+La llamada a activate cambia el símbolo del sistema. Le precede (env) y tiene un aspecto similar al de este ejemplo:
+
+
+(env) -> path/to/project
+En este momento, está dentro de su entorno virtual. Todo lo que haga se ejecuta de forma aislada.
+
+
+INSTALACION DE UN PAQUETE
+Instale un paquete mediante pip. El comando pip usa el índice de paquetes de Python, o PyPi en su forma abreviada, para saber dónde obtener los paquetes. Puede visitar el sitio web de PyPi para ver qué paquetes están disponibles.
+
+Para instalar un paquete, ejecute pip install desde el directorio env, como en este ejemplo:
+
+pip install python-dateutil
+
+Si ejecuta el comando anterior, descargará e instalará dateutil, un paquete para analizar el formato de archivo .yml. Una vez instalado el paquete, puede verlo en la lista si expande el directorio lib en env, de la siguiente forma:
+
+/env
+  /lib
+    /dateutil
+Para ver qué paquetes están ahora instalados en el entorno virtual, puede ejecutar pip freeze. Este comando genera una lista de los paquetes instalados en el terminal:
+
+python-dateutil==2.8.2
+six==1.16.0
+
+ Nota
+
+La razón por la que la lista anterior contiene algo más que simplemente pipdate es que pipdate se basa en otras bibliotecas que también se capturan.
+
+Para asegurarse de que estos paquetes solo existen en el entorno virtual, intente salir de ese entorno mediante una llamada a deactivate:
+
+deactivate
+
+Observe cómo cambia el símbolo del sistema del terminal. Ya no va precedido de (env) y ha cambiado a esta apariencia:
+
+path/to/project
+
+Si ejecuta pip freeze, verá una lista mucho más larga de dependencias. Esta lista indica que se muestran todos los paquetes instalados en la máquina en lugar de solo los que están instalados en el entorno virtual.
+
+
+
+
+También puede usar los siguientes comandos para instalar un paquete:
+
+Tener un conjunto de archivos en la máquina e instalar desde ese origen:
+
+
+cd <to where the package is on your machine>
+python3 -m pip install .
+Instalar desde un repositorio de GitHub que proporciona control de versiones:
+
+
+git+https://github.com/your-repo.git
+Instalar desde un archivo comprimido:
+
+python3 -m pip install package.tar.gz
+Uso de un paquete instalado
+Ahora tiene un paquete instalado. ¿Cómo se usa en el código?
+
+Asegúrese de que tiene un directorio para los archivos. Se recomienda llamar al directorio src y agregar un archivo de Python de punto de entrada denominado app.py. Ahora agregue código para llamar a dateutil:
+
+from datetime import *
+from dateutil.relativedelta import *
+now = datetime.now()
+print(now)
+
+now = now + relativedelta(months=1, weeks=1, hour=10)
+
+print(now)
+Ejecute la aplicación:
+
+
+python newapp.py
+El resultado debe parecerse a este:
+
+
+2023-01-30 17:04:24.799976
+2023-03-07 10:04:24.799976
+
+
+Esta es la tabla de verdad para and:
+
+subexpression1	Operador	subexpression2	Resultado
+True	and	True	True
+True	and	False	False
+False	and	True	False
+False	and	False	False
+Esta es la tabla de verdad para or:
+
+subexpression1	Operador	subexpression2	Resultado
+True	or	True	True
+True	or	False	True
+False	or	True	True
+False	or	False	False
+
+
+
+Usar un carácter de nueva línea (\n).
+Usar comillas triples (""").
+
+Los caracteres de nueva línea separan el texto en varias líneas al imprimir la salida:
+>>> multiline = "Facts about the Moon:\n There is no atmosphere.\n There is no sound."
+>>> print(multiline)
+Facts about the Moon:
+ There is no atmosphere.
+ There is no sound.
+
+Puede lograr el mismo resultado con las comillas triples:
+>>> multiline = """Facts about the Moon:
+...  There is no atmosphere.
+...  There is no sound."""
+>>> print(multiline)
+Facts about the Moon:
+ There is no atmosphere.
+ There is no sound
+
+
+Los métodos de cadena forman parte del tipo str. Esto significa que los métodos existen como variables de cadena o directamente como parte de la cadena. Por ejemplo, el método .title() se puede usar directamente con una cadena:
+>>> "temperatures and facts about the moon".title()
+'Temperatures And Facts About The Moon'
+
+Y el mismo comportamiento y utilización se produce en una variable:
+>>> heading = "temperatures and facts about the moon"
+>>> heading.title()
+'Temperatures And Facts About The Moon'
+
+Un método de cadena común es .split(). Sin argumentos, el método separará la cadena en cada espacio. Esto crearía una lista de todas las palabras o números separados por un espacio:
+>>> temperatures = """Daylight: 260 F
+... Nighttime: -280 F"""
+>>> temperatures .split()
+['Daylight:', '260', 'F', 'Nighttime:', '-280', 'F']
+
+En este ejemplo, trabaja con varias líneas, por lo que el carácter de nueva línea (implícito) se puede usar para dividir la cadena al final de cada línea, y crear líneas únicas:
+
+>>> temperatures .split('\n')
+['Daylight: 260 F', 'Nighttime: -280 F']
+
+Este tipo de división resulta útil cuando se necesita un bucle para procesar o extraer información, o bien cuando se cargan datos desde un archivo de texto.
+
+La manera más sencilla de detectar si existe una palabra, un carácter o un grupo de caracteres determinados en una cadena es usar el operador in:
+>>> "Moon" in "This text will describe facts and challenges with space travel"
+False
+>>> "Moon" in "This text will describe facts about the Moon"
+True
+
+Un enfoque para buscar la posición de una palabra específica en una cadena consiste en usar el método .find():
+>>> temperatures = """Saturn has a daytime temperature of -170 degrees Celsius,
+... while Mars has -28 Celsius."""
+>>> temperatures.find("Moon")
+-1
+
+El método .find() devuelve -1 cuando no se encuentra la palabra, o bien devuelve el índice (el número que representa la posición en la cadena). Así es como se comportaría si busca la palabra Mars:
+>>> temperatures.find("Mars")
+65
+
+65 es la posición donde "Mars" aparece en la cadena.
+
+Otra manera de buscar contenido consiste en usar el método .count(), que devuelve el número total de repeticiones de una palabra determinada en una cadena:
+>>> temperatures.count("Mars")
+1
+>>> temperatures.count("Moon")
+0
+
+Las cadenas en Python distinguen mayúsculas de minúsculas, lo que significa que Luna y luna se consideran palabras diferentes. Para realizar una comparación sin distinguir mayúsculas de minúsculas, puede convertir una cadena en letras minúsculas mediante el método .lower():
+>>> "The Moon And The Earth".lower()
+'the moon and the earth'
+
+Como sucede con el método .lower(), las cadenas tienen un método .upper() que hace lo contrario y convierte todos los caracteres en mayúsculas:
+
+>>> "The Moon And The Earth".upper()
+'THE MOON AND THE EARTH'
+
+Comprobación del contenido
+Hay ocasiones en las que procesará texto para extraer información con una presentación irregular. Por ejemplo, la cadena siguiente es más fácil de procesar que un párrafo no estructurado:
+>>> temperatures = "Mars Average Temperature: -60 C"
+
+Para extraer la temperatura media en Marte, puede hacerlo con los métodos siguientes:
+
+>>> parts = temperatures.split(':')
+>>> parts
+['Mars average temperature', ' -60 C']
+>>> parts[-1]
+' -60 C'
+
+El código anterior confía en que todo lo que hay después de los dos puntos (:) es una temperatura. La cadena se divide en :, lo que genera una lista de dos elementos. El uso de [-1] en la lista devuelve el último elemento que, en este ejemplo, es la temperatura.
+
+Si el texto es irregular, no puede usar los mismos métodos de división para obtener el valor. Debe recorrer en bucle los elementos y comprobar si los valores son de un tipo determinado. Python tiene métodos que ayudan a comprobar el tipo de cadena:
+
+>>> mars_temperature = "The highest temperature on Mars is about 30 C"
+>>> for item in mars_temperature.split():
+...     if item.isnumeric():
+...         print(item)
+...
+30
+
+Como sucede con el método .isnumeric(), .isdecimal() puede buscar cadenas que parezcan decimales.
+
+Le sorprenderá saber que "-70".isnumeric() devolverá False. Esto se debe a que todos los caracteres de la cadena tendrían que ser numéricos y el guión (-) no lo es. Si tiene que comprobar números negativos en una cadena, el método .isnumeric() no funcionará.
+
+Hay validaciones adicionales que puede aplicar en las cadenas para comprobar si hay valores. En el caso de los números negativos, el guion se agrega como prefijo al número y se puede detectar con el método .startswith():
+>>> "-60".startswith('-')
+True
+
+De forma similar, el método .endswith() ayuda a comprobar el último carácter de una cadena:
+>>> if "30 C".endswith("C"):
+    print("This temperature is in Celsius")
+'This temperature is in Celsius'
+
+
+Transformar texto
+Hay otros métodos que ayudan en situaciones en las que el texto se debe transformar en algo distinto. Hasta ahora, ha visto cadenas que pueden usar C para Celsius y F para Fahrenheit. Puede usar el método .replace() para buscar y reemplazar repeticiones de un carácter o grupo de caracteres:
+>>> "Saturn has a daytime temperature of -170 degrees Celsius, while Mars has -28 Celsius.".replace("Celsius", "C")
+'Saturn has a daytime temperature of -170 degrees C, while Mars has -28 C.'
+
+Como se ha mencionado antes, .lower() es una buena manera de normalizar el texto para realizar una búsqueda sin distinguir mayúsculas de minúsculas. Ahora se comprobará rápidamente si algún texto analiza las temperaturas:
+>>> text = "Temperatures on the Moon can vary wildly."
+>>> "temperatures" in text
+False
+>>> "temperatures" in text.lower()
+True
+
+
+Es posible que no tenga que realizar la comprobación sin distinguir mayúsculas de minúsculas todo el tiempo, pero convertir en minúsculas todas las letras es un buen enfoque cuando en el texto se usa una mezcla de mayúsculas y minúsculas.
+
+Después de dividir el texto y realizar las transformaciones, es posible que tenga que volver a ensamblar todas las piezas. Al igual que el método .split() puede separar caracteres, el método .join() puede volver a agruparlos.
+
+El método .join() necesita un elemento iterable (como una lista de Python) como argumento, por lo que su uso es diferente al de otros métodos de cadena:
+
+>>> moon_facts = ["The Moon is drifting away from the Earth.", "On average, the Moon is moving about 4cm every year"]
+>>> '\n'.join(moon_facts)
+'The Moon is drifting away from the Earth.\nOn average, the Moon is moving about 4cm every year'
+En este ejemplo, se usa el carácter de nueva línea '\n' para unir todos los elementos de la lista.
+
+
+
+Formato de cadenas en Python
+
+Además de transformar texto y realizar operaciones básicas, como buscar y buscar coincidencias, es esencial dar formato al texto al presentar información. La manera más sencilla de presentar información de texto con Python consiste en usar la función print(). Comprobará que es fundamental incluir información en variables y otras estructuras de datos en cadenas que print() pueda usar.
+
+En esta unidad, aprenderá varias maneras válidas de incluir valores de variable en el texto mediante Python.
+
+Formato de signo de porcentaje (%)
+El marcador de posición de la variable de la cadena es %s. Después de la cadena, use otro carácter % seguido del nombre de la variable. En el ejemplo siguiente, se muestra cómo dar formato mediante el carácter %:
+
+>>> mass_percentage = "1/6"
+>>> print("On the Moon, you would weigh about %s of your weight on Earth" % mass_percentage)
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+El uso de varios valores cambia la sintaxis, ya que se necesitan paréntesis para rodear las variables que se pasan:
+
+>>> print("""Both sides of the %s get the same amount of sunlight,
+... but only one side is seen from %s because
+... the %s rotates around its own axis when it orbits %s.""" % ("Moon", "Earth", "Moon", "Earth"))
+Both sides of the Moon get the same amount of sunlight,
+but only one side is seen from Earth because
+the Moon rotates around its own axis when it orbits Earth.
+
+El método format()
+El método .format() usa llaves ({}) como marcadores de posición dentro de una cadena y utiliza la asignación de variables para reemplazar texto.
+
+>>> mass_percentage = "1/6"
+>>> print("On the Moon, you would weigh about {} of your weight on Earth".format(mass_percentage))
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+No es necesario asignar variables repetidas varias veces, lo que hace que sea menos detallado porque es necesario asignar menos variables:
+
+>>> print("""You are lighter on the {0}, because on the {0} 
+... you would weigh about {1} of your weight on Earth""".format("Moon", mass_percentage))
+You are lighter on the Moon, because on the Moon you would weigh about 1/6 of your weight on Earth
+
+En lugar de llaves vacías, la sustitución consiste en usar números. {0} significa usar el primer argumento (índice cero) de .format(), que en este caso es Moon. {0} funciona bien para una repetición simple, pero reduce la legibilidad. Para mejorar la legibilidad, use argumentos de palabra clave en .format() y, después, haga referencia a los mismos argumentos entre llaves:
+
+>>> print("""You are lighter on the {moon}, because on the {moon} 
+... you would weigh about {mass} of your weight on Earth""".format(moon="Moon", mass=mass_percentage))
+You are lighter on the Moon, because on the Moon you would weigh about 1/6 of your weight on Earth
+
+
+Acerca de las cadenas f-strings
+A partir de la versión 3.6 de Python, es posible usar f-strings. Estas cadenas parecen plantillas y usan los nombres de variable del código. El uso de f-strings en el ejemplo anterior tendría el siguiente aspecto:
+
+>>> print(f"On the Moon, you would weigh about {mass_percentage} of your weight on Earth")
+On the Moon, you would weigh about 1/6 of your weight on Earth
+
+Las variables se incluyen entre llaves y la cadena debe usar el prefijo f.
+
+Además de que las f-strings son menos detalladas que cualquier otra opción de formato, es posible usar expresiones entre llaves. Estas expresiones pueden ser funciones u operaciones directas. Por ejemplo, si quiere representar el valor 1/6 como un porcentaje con una posición decimal, puede usar directamente la función round():
+
+>>> round(100/6, 1)
+16.7
+
+Con f-strings, no es necesario asignar un valor a una variable de antemano:
+
+>>> print(f"On the Moon, you would weigh about {round(100/6, 1)}% of your weight on Earth")
+On the Moon, you would weigh about 16.7% of your weight on Earth
+
+Para usar una expresión no es necesaria una llamada de función. Cualquiera de los métodos de cadena también son válidos. Por ejemplo, la cadena podría aplicar un uso específico de mayúsculas y minúsculas para crear un título:
+
+>>> subject = "interesting facts about the moon"
+>>> f"{subject.title()}"
+'Interesting Facts About The Moon'
+
+
+
+
+
+
+
+
+Las cadenas de Python son uno de los tipos más comunes que se usan en el lenguaje. En este módulo, ha obtenido información sobre algunas de sus propiedades de cadena y los métodos más comunes para manipularlas. Por último, ha visto formas de dar formato a las cadenas mediante tres técnicas diferentes:
+
+Mediante el formateador %.
+Mediante .format() en una cadena.
+Mediante f-strings.
+
+
+
+
+
+
+Orden de las operaciones
+Python respeta el orden de las operaciones en matemáticas. El orden de las operaciones determina que las expresiones se deben evaluar en este orden:
+
+Paréntesis
+Exponentes
+Multiplicación y división
+Suma y resta
+
+result_1 = 1032 + 26 * 2
+result_2 = 1032 + (26 * 2)
+# The answer is the same in both cases - 1084
+
+Conversión de cadenas en números
+Python admite dos tipos principales de números: números enteros (o int) y número de punto flotante (o float). La diferencia clave entre ambos es la existencia de un separador decimal; los enteros son números enteros, mientras que los números de punto flotante contienen un valor decimal.
+
+Al convertir cadenas en números, debe indicar el tipo de número que desea crear. Tiene que decidir si necesita un separador decimal. Se usa int para realizar la conversión en un número entero y float para hacerlo en un número de punto flotante.
+
+demo_int = int('215')
+print(demo_int)
+
+demo_float = float('215.3')
+print(demo_float)
+
+# Output:
+# 215
+# 215.3
+
+
+
+Valores absolutos
+En matemáticas, un valor absoluto es el número no negativo sin su signo. El uso de un valor absoluto puede ser útil en situaciones varias, incluido el ejemplo de búsqueda para determinar la distancia entre dos planetas. Considere los cálculos siguientes:
+
+39 - 16
+16 - 39
+
+Observe que la diferencia entre las dos ecuaciones es que los números se invierten. Las respuestas son 23 y -23, respectivamente. Al determinar la distancia entre dos planetas, no importa el orden en el que se escriben los números, ya que la respuesta absoluta es la misma.
+
+Use abs para convertir el valor negativo en su valor absoluto. Si hace la misma operación mediante abs (e imprime las respuestas), verá que muestra 23 para ambas ecuaciones.
+print(abs(39 - 16))
+print(abs(16 - 39))
+
+# Output
+# 23
+# 23
+
+Redondeo
+También es útil la función integrada de Python denominada round. Úsela para redondear hacia arriba al entero más cercano si el valor decimal es .5 o mayor, o bien hacia abajo si es menor que .5.
+print(round(14.5))
+
+# Output: 15
+
+Biblioteca matemática
+Python tiene bibliotecas para proporcionar operaciones y cálculos más avanzados. Una de las más comunes es la biblioteca math. math permite hacer el redondeo con floor y ceil, proporcionar el valor de pi y muchas otras operaciones. Veamos cómo usar esta biblioteca para redondear hacia arriba o hacia abajo.
+
+El redondeo de números permite quitar la parte decimal de un número de punto flotante. Puede optar por redondear siempre hacia arriba al número entero más cercano si usa ceil, o hacia abajo si usa floor.
+
+from math import ceil, floor
+
+round_up = ceil(12.5)
+print(round_up)
+
+round_down = floor(12.5)
+print(round_down)
+
+# Output
+# 13
+# 12
+
+Crear una lista
+Para crear una lista, asigne una secuencia de valores a una variable. Cada valor está separado por una coma y están entre corchetes ([]). En el ejemplo siguiente se almacena la lista de todos los planetas de la variable planets:
+
+planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+
+Acceso a elementos de lista por índice
+Puede acceder a cualquier elemento de una lista colocando el índice entre corchetes [] después del nombre de la variable de lista. Los índices comienzan a partir de 0, por lo que en el código siguiente, planets[0] es el primer elemento de la lista planets:
+print("The first planet is", planets[0])
+print("The second planet is", planets[1])
+print("The third planet is", planets[2])
+
+# Output
+# The first planet is Mercury
+# The second planet is Venus
+# The third planet is Earth
+
+ Dado que todos los índices empiezan por 0, [1] es el segundo elemento, [2] es el tercero, etc.
+
+También puede modificar valores de una lista mediante un índice. Para ello, asigne un nuevo valor, de la misma manera que asignaría un valor de variable. Por ejemplo, podría cambiar el nombre de Marte en la lista para usar su alias:
+
+planets[3] = "Red Planet"
+print("Mars is also known as", planets[3])
+
+# Output
+# Mars is also known as Red Planet
+
+
+Determinación de la longitud de una lista
+Para obtener la longitud de una lista, use la función integrada len(). El código siguiente crea una variable, number_of_planets. El código asigna esa variable con el número de elementos de la lista planets (8).
+
+number_of_planets = len(planets)
+print("There are", number_of_planets, "planets in the solar system.")
+
+# Output:
+# There are 8 planets in the solar system
+
+
+Incorporación de valores a listas
+Las listas de Python son dinámicas: puede agregar y quitar elementos después de crearlas. Para agregar un elemento a una lista, use el método .append(value).
+
+Por ejemplo, el código siguiente agrega la cadena "Pluto" al final de la lista planets:
+
+planets.append("Pluto")
+number_of_planets = len(planets)
+print("There are actually", number_of_planets, "planets in the solar system.")
+
+# Output:
+# There are actually 9 planets in the solar system.
+
+Eliminación de valores de listas
+Puede quitar el último elemento de una lista llamando al método .pop() en la variable de lista:
+
+
+planets.pop()  # Goodbye, Pluto
+number_of_planets = len(planets)
+print("No, there are definitely", number_of_planets, "planets in the solar system.")
+
+Uso de índices negativos
+Ha visto cómo usar índices para capturar un elemento individual en una lista:
+
+print("The first planet is", planets[0])
+
+# Output:
+# The first planet is Mercury
+
+Los índices comienzan en cero y van en aumento. Los índices negativos comienzan al final de la lista y van hacia atrás.
+
+En el ejemplo siguiente, un índice de -1 devuelve el último elemento de una lista. Un índice de -2 devuelve el penúltimo
+
+print("The last planet is", planets[-1])
+print("The penultimate planet is", planets[-2])
+
+# Output
+# The last planet is Neptune
+# The penultimate planet is Uranus
+
+
+Si quisiera devolver el antepenúltimo, usaría un índice de -3 (y así sucesivamente).
+Búsqueda de un valor en una lista
+Para determinar dónde se almacena un valor en una lista, use el método index de la lista. Este método busca el valor y devuelve el índice de ese elemento en la lista. Si no encuentra ninguna coincidencia, devuelve -1.
+
+En el ejemplo siguiente se muestra el uso de "Jupiter" como el valor del índice:
+jupiter_index = planets.index("Jupiter")
+print("Jupiter is the", jupiter_index + 1, "planet from the sun")
+
+# Output
+# Jupiter is the 5 planet from the sun
+
+Dado que la indexación comienza por 0, debe agregar 1 para mostrar el número adecuado.
+
+Almacenamiento de números en listas
+Para almacenar números con decimales en Python, se debe usar el tipo float. Para crear un valor float, escriba el número con la posición decimal y asígnelo a una variable:
+
+gravity_on_earth = 1.0
+gravity_on_the_moon = 0.166
+
+El código siguiente crea una lista en la que se muestran las fuerzas de los ocho planetas del sistema solar, en G:
+gravity_on_planets = [0.378, 0.907, 1, 0.377, 2.36, 0.916, 0.889, 1.12]
+
+
+En esta lista, gravity_on_planets[0] es la gravedad en Mercurio (0,378 G), gravity_on_planets[1] es la gravedad en Venus (0,907 G), y así sucesivamente.
+
+En la Tierra, un autobús de dos pisos pesa 12 650 kilogramos (kg), es decir, 12,65 toneladas. En Mercurio, donde la gravedad es de 0,378 G, el mismo autobús pesa 12,65 toneladas multiplicado por 0,378. En Python, para multiplicar dos valores, se usa el símbolo *.
+
+En el ejemplo siguiente, puede averiguar el peso de un autobús de dos pisos en diferentes planetas obteniendo el valor de la lista:
+
+
+
+
+bus_weight = 12650 # in kilograms, on Earth
+
+print("On Earth, a double-decker bus weighs", bus_weight, "kg")
+print("On Mercury, a double-decker bus weighs", bus_weight * gravity_on_planets[0], "kg")
+
+# Output
+# On Earth, a double-decker bus weighs 12650 kg
+# On Mercury, a double-decker bus weighs 4781.7 kg
+
+Uso de min() y max() con listas
+Python tiene funciones integradas para calcular los números más grandes y más pequeños de una lista. La función max() devuelve el número más grande y min() devuelve el más pequeño. Por lo tanto, min(gravity_on_planets) devuelve el número más pequeño de la lista gravity_on_planets, que es 0,377 (Marte).
+
+El código siguiente calcula los pesos mínimo y máximo en el sistema solar mediante esas funciones:
+
+bus_weight = 12650 # in kilograms, on Earth
+
+print("On Earth, a double-decker bus weighs", bus_weight, "kg")
+print("The lightest a bus would be in the solar system is", bus_weight * min(gravity_on_planets), "kg")
+print("The heaviest a bus would be in the solar system is", bus_weight * max(gravity_on_planets), "kg")
+
+# Output
+# On Earth, a double-decker bus weighs 12650 kg
+# The lightest a bus would be in the solar system is 4769.05 kg
+# The heaviest a bus would be in the solar system is 29854 kg
+
+
+Manipulación de datos de la lista
+
+Es posible que tenga que trabajar con distintas partes de una lista. Por ejemplo, suponga que tiene una lista con cantidades de precipitaciones durante varios meses. Para analizar correctamente este tipo de datos, es posible que tenga que buscar las precipitaciones en otoño o en un periodo de tres meses. También puede que quiera ordenar la lista de mayor a menor cantidad de precipitaciones.
+
+Python proporciona una compatibilidad sólida para trabajar con los datos de las listas. Esta compatibilidad incluye la segmentación de datos (examinando solo una parte) y la ordenación.
+
+Segmentación de listas
+Puede recuperar una parte de una lista mediante una segmentación. Una segmentación usa corchetes, pero en lugar de un solo elemento, tiene los índices inicial y final. Cuando se usa una segmentación, se crea una lista que comienza en el índice inicial y termina antes del índice final (y no lo incluye).
+
+La lista de planetas tiene ocho elementos. La Tierra es el tercero de la lista. Para mostrar los planetas que hay antes de la Tierra, use una segmentación a fin de obtener los elementos que empiezan en 0 y terminan en 2:
+
+
+planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+planets_before_earth = planets[0:2]
+print(planets_before_earth)
+
+# Output: ['Mercury', 'Venus']
+
+
+Observe cómo la Tierra no está incluida en la lista. El motivo es que el índice finaliza antes del índice final.
+
+Para obtener todos los planetas después de la Tierra, comience en el tercero y vaya hasta el octavo:
+
+planets_after_earth = planets[3:8]
+print(planets_after_earth) 
+
+# Output
+# ['Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+
+En este ejemplo, se muestra Neptuno. La razón es que el índice de Neptuno es 7, porque la indexación comienza en 0. Dado que el índice final era 8, incluye el último valor. Si no coloca el índice de detención en la segmentación, Python asume que quiere ir al final de la lista:
+
+planets_after_earth = planets[3:]
+print(planets_after_earth)
+
+# Output
+# ['Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
+
+Una segmentación crea una lista nueva. No modifica la lista actual.
+
+Combinación de listas
+Ha visto cómo puede usar segmentaciones para dividir listas, pero ¿qué sucede con unirlas de nuevo?
+
+Para unir dos listas, debe usar el otro operador (+) con dos listas para devolver una nueva.
+
+Hay 79 lunas conocidas de Júpiter. Las cuatro más grandes son Ío, Europa, Ganímedes y Calisto. Estas lunas se denominan lunas galileanas, ya que Galileo Galilei las descubrió con su telescopio en 1610. El grupo de Amaltea está más cerca de Júpiter que el grupo galileano. Consta de las lunas Metis, Adrastea, Amaltea y Tebe.
+
+Cree dos listas. Rellene la primera lista con las cuatro lunas de Amaltea y la segunda lista con las cuatro lunas galileanas. Únalas mediante + para crear una lista:
+
+amalthea_group = ["Metis", "Adrastea", "Amalthea", "Thebe"]
+galilean_moons = ["Io", "Europa", "Ganymede", "Callisto"]
+
+regular_satellite_moons = amalthea_group + galilean_moons
+print("The regular satellite moons of Jupiter are", regular_satellite_moons)
+
+# Output
+# The regular satellite moons of Jupiter are ['Metis', 'Adrastea', 'Amalthea', 'Thebe', 'Io', 'Europa', 'Ganymede', 'Callisto']
+
+La unión de listas crean una lista nueva. No modifica la lista actual.
+
+Para ordenar una lista, use el método .sort() de la lista. Python ordenará una lista de cadenas en orden alfabético y una lista de números en orden numérico:
+
+regular_satellite_moons.sort()
+print("The regular satellite moons of Jupiter are", regular_satellite_moons)
+
+# Output
+# The regular satellite moons of Jupiter are ['Adrastea', 'Amalthea', 'Callisto', 'Europa', 'Ganymede', 'Io', 'Metis', 'Thebe']
+
+Para ordenar una lista en orden inverso, llame a .sort(reverse=True) en la lista:
+
+regular_satellite_moons.sort(reverse=True)
+print("The regular satellite moons of Jupiter are", regular_satellite_moons)
+
+# Output
+# The regular satellite moons of Jupiter are ['Thebe', 'Metis', 'Io', 'Ganymede', 'Europa', 'Callisto', 'Amalthea', 'Adrastea']
+
+El uso de sort modifica la lista actual.
+
+
+Un bucle while realiza una operación mientras (while, en inglés) una determinada condición es True. Puede usar un bucle while para lo siguiente:
+
+Buscar otra línea en un archivo.
+Comprobar si se ha establecido alguna marca.
+Comprobar si un usuario ha terminado de introducir valores.
+Comprobar si algo más ha cambiado para indicar que el código puede dejar de realizar la operación.
+
+
+Lo más importante que se debe recordar al crear bucles while es asegurarse de que cambia la condición. Si la condición siempre es True, Python seguirá ejecutando el código hasta que el programa se bloquee.
+
+La sintaxis de un bucle while es similar a la de una instrucción if. Proporcione una condición y el código que quiere ejecutar mientras la condición sea True.
+
+Un bucle while tiene tres partes importantes:
+
+La palabra clave while, seguida de un espacio.
+
+La condición que se va a probar. Si la condición es True, se ejecutará el código dentro del bucle while.
+
+El código que se quiere ejecutar en cada iteración, con sangría aplicada mediante espacios en blanco. Por ejemplo:
+
+while condition:
+    # code here
+
+Veamos cómo se puede crear código para pedir a los usuarios que introduzcan valores y, después, permitirles usar done cuando terminen de introducirlos. En nuestro ejemplo, la entrada de usuario es la condición que se comprueba al principio del bucle while.
+
+user_input = ''
+
+while user_input.lower() != 'done':
+    user_input = input('Enter a new value, or done when done')
+
+Tenga en cuenta que usa input para preguntar a los usuarios. Cada vez que los usuarios escriben un nuevo valor, cambian la condición, lo que significa que el bucle while se cerrará una vez que se haya escrito done.
+En nuestro ejemplo, hemos usado lower para convertir la entrada a minúsculas, lo que permite una comparación que no distingue mayúsculas de minúsculas.
+Puede usar la cadena recién escrita como lo haría con cualquier otra cadena capturada con input. Si quiere agregarla a una lista, puede usar código similar al ejemplo siguiente:
+
+# Create the variable for user input
+user_input = ''
+# Create the list to store the values
+inputs = []
+
+# The while loop
+while user_input.lower() != 'done':
+    # Check if there's a value in user_input
+    if user_input:
+        # Store the value in the list
+        inputs.append(user_input)
+    # Prompt for a new value
+    user_input = input('Enter a new value, or done when done')
+
+Observe la instrucción if dentro del bucle while. Esta instrucción prueba si hay un valor de cadena dentro de user_input. Si el bucle while se ejecuta por primera vez, no hay ningún valor, por lo que no hay nada que almacenar en inputs. Después de que se ejecute por primera vez, user_input siempre conserva el valor que el usuario ha escrito. Dado que while está probando para asegurarse de que el valor no es igual a done (la palabra que el usuario escribirá para salir de la aplicación), sabe que el valor actual es uno que puede agregar a la lista.
+Es posible que conozca bien otros lenguajes de programación que admiten un bucle do, lo que le permite realizar una prueba en la parte inferior del bucle. Python no proporciona un bucle do.
+
+
+Uso de bucles "for" con listas
+
+En Python, las listas pueden almacenar cualquier tipo de valor, como cadenas o números:
+
+planets = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+
+Puede acceder a cualquier elemento de una lista poniendo el índice entre corchetes ([]) después del nombre de la variable. Los índices comienzan a partir de 0:
+
+print("The first planet is ", planets[0])
+print("The second planet is ", planets[1])
+print("The third planet is ", planets[2])
+
+También puede determinar el número de elementos de una lista mediante len. Por lo tanto, podría usar un bucle while y un contador para recorrer en bucle o en iteración cada elemento de la lista. Como esta operación es tan común, Python proporciona bucles for, que puede usar para recorrer en iteración las listas.
+
+Python tiene muchos tipos que se pueden recorrer en bucle. Estos tipos se conocen como iterables.
+
+Las listas de Python son iterables y se pueden usar con un bucle for. Se usa un bucle for con objetos iterables que va a recorrer en bucle un número conocido de veces, una vez para cada elemento del objeto iterable.
+
+Este es un bucle for de ejemplo que hace una cuenta atrás, de 4 a 0:
+
+countdown = [4, 3, 2, 1, 0]
+for number in countdown:
+    print(number)
+print("Blast off!! 🚀")
+
+El bucle for es una instrucción con cinco partes importantes:
+
+La palabra for, seguida de un espacio.
+El nombre de la variable que quiere crear para cada valor de la secuencia (number).
+La palabra in, entre espacios.
+El nombre de la lista (countdown, en el ejemplo anterior) u objeto iterable que quiere recorrer en bucle, seguido de dos puntos (:).
+El código que quiere ejecutar para cada elemento del objeto iterable, separado por espacios en blanco anidados.
+Vamos a cambiar ese código para que espere un segundo entre cada número mediante la función sleep():
+
+from time import sleep
+
+countdown = [4, 3, 2, 1, 0]
+
+for number in countdown:
+    print(number)
+    sleep(1)  # Wait 1 second
+print("Blast off!! 🚀")
+
+La mayoría del código de Python usa cuatro espacios como la unidad del espacio en blanco. Para ahorrar tener que presionar la barra espaciador cuatro veces, la mayoría de los editores tienen una función rápida de teclado con la tecla Tab, que inserta cuatro espacios.
+
+
+
+
+
+
